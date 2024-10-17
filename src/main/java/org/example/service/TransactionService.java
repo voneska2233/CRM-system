@@ -1,6 +1,5 @@
 package org.example.service;
 
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.dto.TransactionDTO;
 import org.example.entity.Seller;
@@ -9,18 +8,16 @@ import org.example.exception.ResourceNotFoundException;
 import org.example.repository.SellerRepository;
 import org.example.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Validated
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final SellerRepository sellerRepository;
 
-    public Transaction createTransaction(@Valid TransactionDTO transactionDTO) {
+    public Transaction createTransaction(TransactionDTO transactionDTO) {
         Seller seller = sellerRepository.findById(transactionDTO.getSellerId())
                 .orElseThrow(() -> new ResourceNotFoundException("Не существует продавца с ID " + transactionDTO.getSellerId()));
         return transactionRepository.save(Transaction.builder()

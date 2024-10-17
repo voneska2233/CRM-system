@@ -15,11 +15,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/sellers")
+@Validated
 public class SellerController {
     private final SellerService sellerService;
 
     @PostMapping
-    public ResponseEntity<Seller> createSeller(@RequestBody SellerDTO sellerDTO) {
+    public ResponseEntity<Seller> createSeller(@Valid @RequestBody SellerDTO sellerDTO) {
         return new ResponseEntity<>(sellerService.createSeller(sellerDTO), HttpStatus.CREATED);
     }
 
@@ -34,7 +35,7 @@ public class SellerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @RequestBody SellerDTO sellerDTO) {
+    public ResponseEntity<Seller> updateSeller(@PathVariable Long id, @Valid @RequestBody SellerDTO sellerDTO) {
         return new ResponseEntity<>(sellerService.updateSeller(id, sellerDTO), HttpStatus.OK);
     }
 

@@ -18,17 +18,17 @@ public class ExceptionApiHandler {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, String>> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getFieldErrors().forEach(fieldError -> {
             errors.put(fieldError.getField(), fieldError.getDefaultMessage());
         });
-        return new ResponseEntity<>(errors.toString(), HttpStatus.BAD_REQUEST);
+        return ResponseEntity.badRequest().body(errors);
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, String>> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
         Map<String, String> error = new HashMap<>();
-        error.put("error", "Неправильно введен тип оплаты (правильный тип: CARD, TRANSFER, CASH.");
+        error.put("error", "Неправильно введен тип оплаты (правильный тип: CARD, TRANSFER, CASH)");
         return ResponseEntity.badRequest().body(error);
     }
 }

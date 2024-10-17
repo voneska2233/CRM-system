@@ -13,11 +13,10 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Validated
 public class SellerService {
     private final SellerRepository sellerRepository;
 
-    public Seller createSeller(@Valid SellerDTO sellerDTO) {
+    public Seller createSeller(SellerDTO sellerDTO) {
         return sellerRepository.save(Seller.builder()
                 .name(sellerDTO.getName())
                 .contactInfo(sellerDTO.getContactInfo())
@@ -33,7 +32,7 @@ public class SellerService {
         return sellerRepository.findAll();
     }
 
-    public Seller updateSeller(Long sellerId, @Valid SellerDTO sellerDTO) {
+    public Seller updateSeller(Long sellerId, SellerDTO sellerDTO) {
         Seller seller = sellerRepository.findById(sellerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Продавец с ID " + sellerId + " не найден"));
         seller.setName(sellerDTO.getName());
