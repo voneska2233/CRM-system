@@ -1,13 +1,11 @@
 package org.example.service;
 
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.dto.SellerDTO;
 import org.example.entity.Seller;
 import org.example.exception.ResourceNotFoundException;
 import org.example.repository.SellerRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 

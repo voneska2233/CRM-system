@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +24,8 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "seller_id", nullable = false)
     private Seller sellerId;
+    @NotNull(message = "Поле amount не должен быть null")
+    @PositiveOrZero(message = "Значение amount должно быть неотрицательным")
     private BigDecimal amount;
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
