@@ -68,7 +68,7 @@ class TransactionServiceTest {
                 .paymentType(PaymentType.valueOf("CASH"))
                 .build();
 
-        when(transactionRepository.save(any(Transaction.class))).thenReturn(savedTransaction);
+        when(transactionRepository.save(savedTransaction)).thenReturn(savedTransaction);
 
         Transaction createdTransaction = transactionService.createTransaction(transactionDTO);
 
@@ -77,7 +77,7 @@ class TransactionServiceTest {
         assertEquals(createdTransaction.getAmount(), transactionDTO.getAmount());
         assertEquals(createdTransaction.getPaymentType(), transactionDTO.getPaymentType());
         verify(sellerRepository, times(1)).findById(excitingSeller.getId());
-        verify(transactionRepository, times(1)).save(any(Transaction.class));
+        verify(transactionRepository, times(1)).save(savedTransaction);
     }
 
     @Test

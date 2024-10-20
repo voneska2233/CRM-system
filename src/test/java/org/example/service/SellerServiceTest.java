@@ -47,14 +47,14 @@ class SellerServiceTest {
                 .name("Test Seller")
                 .contactInfo("89675435453")
                 .build();
-        when(sellerRepository.save(any(Seller.class))).thenReturn(savedSeller);
+        when(sellerRepository.save(savedSeller)).thenReturn(savedSeller);
 
         Seller createdSeller = sellerService.createSeller(sellerDTO);
 
         assertNotNull(createdSeller);
         assertEquals(createdSeller.getName(), sellerDTO.getName());
         assertEquals(createdSeller.getContactInfo(), sellerDTO.getContactInfo());
-        verify(sellerRepository, times(1)).save(any(Seller.class));
+        verify(sellerRepository, times(1)).save(savedSeller);
     }
 
 
@@ -90,7 +90,7 @@ class SellerServiceTest {
         sellerDTO.setContactInfo("89675435453");
 
         when(sellerRepository.findById(existingSeller.getId())).thenReturn(Optional.of(existingSeller));
-        when(sellerRepository.save(any(Seller.class))).thenAnswer(invocation -> {
+        when(sellerRepository.save(existingSeller)).thenAnswer(invocation -> {
             Seller sellerToSave = invocation.getArgument(0);
             existingSeller.setName(sellerToSave.getName());
             existingSeller.setContactInfo(sellerToSave.getContactInfo());

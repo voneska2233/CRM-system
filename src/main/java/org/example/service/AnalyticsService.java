@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,8 +21,8 @@ public class AnalyticsService {
     private final TransactionRepository transactionRepository;
 
     public Optional<Seller> getTopSellerByDay(String date){
-        LocalDateTime startOfDay = LocalDateTime.parse(date + "T00:00:00");
-        LocalDateTime endOfDay = LocalDateTime.parse(date + "T23:59:59");
+            LocalDateTime startOfDay = LocalDateTime.parse(date + "T00:00:00");
+            LocalDateTime endOfDay = LocalDateTime.parse(date + "T23:59:59");
         return findTopSellerByPeriod(startOfDay, endOfDay);
     }
 
