@@ -20,6 +20,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Seller {
+
+    public Seller(String name, String contactInfo, LocalDateTime registrationDate) {
+        this.name = name;
+        this.contactInfo = contactInfo;
+        this.registrationDate = registrationDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,4 +37,6 @@ public class Seller {
     private String contactInfo;
     @CreationTimestamp
     private LocalDateTime registrationDate;
+
+
 }

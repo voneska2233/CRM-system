@@ -18,6 +18,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Transaction {
+
+    public Transaction(Seller sellerId, BigDecimal amount, PaymentType paymentType, LocalDateTime transactionDate) {
+        this.sellerId = sellerId;
+        this.amount = amount;
+        this.paymentType = paymentType;
+        this.transactionDate = transactionDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
